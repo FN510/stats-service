@@ -7,6 +7,11 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 /* -- database --- */
 const mongoose = require('mongoose');
 var ObjectId = require('mongoose').Types.ObjectId; 
+// db models
+const Session = require("./models/session");
+const Course = require("./models/course");
+const User = require("./models/user");
+// db driver
 mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=> {
 	console.log("connected to db...");
@@ -17,26 +22,6 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUn
 
 
 // Each course has modules which are studied in sessions by a user
-const userSchema = new mongoose.Schema({
-	name: String
-});
-const User = mongoose.model('User', userSchema);
-
-const courseSchema = new mongoose.Schema({
-	name: String
-});
-const Course = mongoose.model('Course', courseSchema);
-
-// Schema for a study session
-const sessionSchema = new mongoose.Schema({
-	userId: {type: mongoose.Schema.Types.ObjectID, ref: 'User'},
-	courseId: {type: mongoose.Schema.Types.ObjectID, ref: 'Course'},
-	totalModulesStudied: Number,
-	averageScore: Number,
-	timeStudied: Number
-});
-const Session = mongoose.model('Session', sessionSchema);
-
 
 //---- routes ----
 
@@ -73,7 +58,7 @@ app.get("/courses/:courseId/sessions/:sessionId", (req, res) => {
 			};
 			res.json(result);
 		} else {
-			res.send("Not found");
+			res.status(404).send("Session not found");
 		}
 	})
 });
