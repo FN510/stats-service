@@ -29,8 +29,8 @@ const Course = mongoose.model('Course', courseSchema);
 
 // Schema for a study session
 const sessionSchema = new mongoose.Schema({
-	userId: String,
-	courseId: String,
+	userId: {type: mongoose.Schema.Types.ObjectID, ref: 'User'},
+	courseId: {type: mongoose.Schema.Types.ObjectID, ref: 'Course'},
 	totalModulesStudied: Number,
 	averageScore: Number,
 	timeStudied: Number
@@ -64,7 +64,7 @@ app.get("/courses/:courseId/sessions/:sessionId", (req, res) => {
 	}
 	Session.findOne(sessionQuery)
 	.then(data=> {
-		if (typeof data == 'object' && data!=null) {
+		if (data!=null && typeof data =="object") {
 			let result = {
 				"sessionId": data._id,
 				"totalModulesStudied": data.totalModulesStudied,
@@ -72,6 +72,8 @@ app.get("/courses/:courseId/sessions/:sessionId", (req, res) => {
 				"timeStudied": data.timeStudied
 			};
 			res.json(result);
+		} else {
+			res.send("Not found");
 		}
 	})
 });
