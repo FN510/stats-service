@@ -210,15 +210,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
-							"});\r",
+							"\r",
 							"pm.test(\"X-User-Id is present in request\", function () {\r",
 							"    pm.request.to.have.header(\"X-User-Id\");\r",
 							"});\r",
-							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -229,20 +225,20 @@
 				"header": [
 					{
 						"key": "X-User-Id",
-						"value": "60d4d9de2e65522824421939",
+						"value": "60d5fabf3cb70946c077f221",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{url}}/courses/60d4d9de2e65522824421938/sessions/60d5055e54cdd2417c025d44",
+					"raw": "{{url}}/courses/60d600393192904f2098442f/sessions/60d600393192904f2098443e",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"courses",
-						"60d4d9de2e65522824421938",
+						"60d600393192904f2098442f",
 						"sessions",
-						"60d5055e54cdd2417c025d44"
+						"60d600393192904f2098443e"
 					]
 				}
 			},

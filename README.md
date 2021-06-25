@@ -1,5 +1,11 @@
 # Stats Service
 
+## To Run
+From  root of folder:
+```
+npm start
+```
+
 ## APIs
 The express.js framework is being used to faciliate the API routing.
 
@@ -66,9 +72,9 @@ const sessionSchema = new mongoose.Schema({
 ```
 
 ## Testing
-There is a [postman](http://postman.com) collection in the test folder. Each request in the postman collection has a series of tests that are run when a request is sent.
+There is a [postman](http://postman.com) collection in the test folder. Each request in the postman collection has a series of tests that are run when a request is sent. A global variable url should be set http://localhost:3000 in postman.
 
-### Data
+### Some Data
 | Course  | courseId                 |
 |---------|--------------------------|
 | Maths   | 60d600393192904f2098442f |
@@ -88,3 +94,8 @@ There is a [postman](http://postman.com) collection in the test folder. Each req
 | 60d600393192904f2098443e | 60d5fabf3cb70946c077f221 | 60d600393192904f2098442f | 
 | 60d600393192904f2098443f | 60d5fabf3cb70946c077f221 | 60d600393192904f2098442f | 
 | 60d600393192904f20984440 | 60d5fabf3cb70946c077f221 | 60d600393192904f2098442f | 
+
+## My Comments
+- I assumed the averageScore should be to 1 dp
+- I assumed the request body for saving a new session should contain a key 'status diff'
+- I used mongoDBs ObjectID as IDs not a uuid
