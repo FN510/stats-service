@@ -6,6 +6,34 @@ The express.js framework is being used to faciliate the API routing.
 ### GET /courses/:courseId
 ### POST /courses/:courseId
 ### GET /courses/:courseId/sessions/:sessionId
+Looks for a session with id matching :sessionId, courseId matching :courseId and userId matching request.header.X-User-Id 
+returns json
+
+example status 200 response:
+
+```JSON
+{
+"sessionId":"507f1f77bcf86cd799439011",
+"courseId": "507f1f77bcf86cd799439111",
+"totalModulesStudied": 7,
+"averageScore": 81,
+"timeStudied": 2220000
+}
+```
+
+status 404 response
+```JSON
+{
+"error": "Session not found"
+}
+```
+
+status 400 response
+```JSON
+{
+"error": "X-User-Id is required"
+}
+```
 
 ## Data Storage
 The application is connected to an cloud instance of mongoDB, a noSQL database. A schema has been defined for a User, Course and Session.
