@@ -14,6 +14,61 @@
 						"exec": [
 							"pm.test(\"X-User-Id is present in request\", function () {\r",
 							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"type": "text",
+						"value": "60d4d9de2e65522824421939"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"stats diff\": {\r\n        \"sessionId\": \"60d4d9de2e65522824421931\",\r\n        \"totalModulesStudied\": \"10\",\r\n        \"averageScore\": \"55\",\r\n        \"timeStudied\": \"17000000\" \r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/courses/60d4d9de2e65522824421938",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d4d9de2e65522824421938"
+					]
+				},
+				"description": "Persists a session study event"
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId invalid courseId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-User-Id is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"error response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Course not found\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -25,14 +80,13 @@
 				"header": [
 					{
 						"key": "X-User-Id",
-						"value": "4000",
 						"type": "text",
-						"disabled": true
+						"value": "60d5fabf3cb70946c077f223"
 					}
 				],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [],
+					"mode": "raw",
+					"raw": "{\r\n    \"stats diff\": {\r\n        \r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,13 +94,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/courses/1",
+					"raw": "{{url}}/courses/60d600393192904f20984431",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"courses",
-						"1"
+						"60d600393192904f20984431"
 					]
 				},
 				"description": "Persists a session study event"
@@ -54,7 +108,7 @@
 			"response": []
 		},
 		{
-			"name": "/courses/:courseId",
+			"name": "/courses/:courseId invalid userId Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -69,7 +123,7 @@
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "X-User-Id",
@@ -77,18 +131,75 @@
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"stats diff\": {\r\n        \"sessionId\": \"60d4d9de2e65522824421931\",\r\n        \"totalModulesStudied\": \"10\",\r\n        \"averageScore\": \"55\",\r\n        \"timeStudied\": \"17000000\" \r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{url}}/courses/60d4e5d88adb144944f6e84e/",
+					"raw": "{{url}}/courses/60d4d9de2e65522824421938",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"courses",
-						"60d4e5d88adb144944f6e84e",
-						""
+						"60d4d9de2e65522824421938"
 					]
 				},
-				"description": "Fetches course lifetime statistics"
+				"description": "Persists a session study event"
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId - duplicate sessionId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-User-Id is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "60d4d9de2e65522824421939",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"stats diff\": {\r\n        \"sessionId\": \"60d4d9de2e65522824421931\",\r\n        \"totalModulesStudied\": \"10\",\r\n        \"averageScore\": \"55\",\r\n        \"timeStudied\": \"17000000\" \r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/courses/60d4d9de2e65522824421938",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d4d9de2e65522824421938"
+					]
+				}
 			},
 			"response": []
 		},
@@ -144,16 +255,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
-							"});\r",
-							"pm.test(\"Response is JSON\", function () {\r",
-							"    pm.response.to.be.json;\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-							"});\r",
 							"pm.test(\"Status code is 400\", function () {\r",
 							"    pm.response.to.have.status(400);\r",
 							"});"
@@ -177,6 +278,109 @@
 						"60d5055e54cdd2417c025d44"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId GET alice's scores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-UserId is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});\r",
+							"pm.test(\"Alice's average\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.averageScore).to.eql(75.7);\r",
+							"});\r",
+							"pm.test(\"Alice's total time\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.timeStudied).to.eql(22380000);\r",
+							"});\r",
+							"pm.test(\"Alice's total no. of modules studied\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.totalModulesStudied).to.eql(36);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "60d5fabf3cb70946c077f221",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/courses/60d600393192904f2098442f/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d600393192904f2098442f",
+						""
+					]
+				},
+				"description": "Fetches course lifetime statistics"
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId GET bob's scores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-User-Id is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Bob's average\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.averageScore).to.eql(67.4);\r",
+							"});\r",
+							"pm.test(\"Bob's total time\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.timeStudied).to.eql(10800000);\r",
+							"});\r",
+							"pm.test(\"Bob's total no. of modules studied\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.totalModulesStudied).to.eql(23);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"type": "text",
+						"value": "60d5fabf3cb70946c077f222"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/courses/60d600393192904f20984430/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d600393192904f20984430",
+						""
+					]
+				},
+				"description": "Fetches english lifetime statistics for Bob"
 			},
 			"response": []
 		}
