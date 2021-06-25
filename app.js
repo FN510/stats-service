@@ -36,13 +36,11 @@ app.post("/courses/:courseId", (req, res)=> {
 		User.findById(userId)
 		.then(data=> {
 			if (data!=null) {
-				console.log("user");
 				// check course exists
 				let courseId = req.params.courseId;
 				Course.findById(courseId)
 				.then(data=> {
 					if (data!=null) {
-						console.log("course");
 						// check json body for session details
 						if (req.body.hasOwnProperty("stats diff")) {
 							let details = req.body["stats diff"]
@@ -59,14 +57,13 @@ app.post("/courses/:courseId", (req, res)=> {
 									res.status(400).json({"error": "SessionId already exists"})
 								}
 							})
-							console.log("good post");
 							let postSession = new Session({
 								_id: new ObjectId(details.sessionId),
 								userId: new ObjectId(userId),
-									// courseId: new ObjectId(details.courseId),
-									// totalModulesStudied: parseInt(details.totalModulesStudied),
-									// averageScore: parseInt(details.averageScore),
-									// timeStudied: parseInt(details.timeStudied)
+									courseId: new ObjectId(details.courseId),
+									totalModulesStudied: parseInt(details.totalModulesStudied),
+									averageScore: parseInt(details.averageScore).toFixed(1),
+									timeStudied: parseInt(details.timeStudied)
 							});
 							postSession.save()
 							.then(()=> res.status(201).json({"status": "OK"}))
