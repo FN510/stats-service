@@ -62,7 +62,7 @@ app.post("/courses/:courseId", (req, res)=> {
 								userId: new ObjectId(userId),
 									courseId: new ObjectId(details.courseId),
 									totalModulesStudied: parseInt(details.totalModulesStudied),
-									averageScore: parseInt(details.averageScore).toFixed(1),
+									averageScore: parseFloat(parseFloat(details.averageScore).toFixed(1)),
 									timeStudied: parseInt(details.timeStudied)
 							});
 							postSession.save()
@@ -79,6 +79,7 @@ app.post("/courses/:courseId", (req, res)=> {
 				res.status(404).json({"error":"User not found"});
 			}
 		})
+		.catch(err=> res.status(404).json(err));
 	}
 	
 	

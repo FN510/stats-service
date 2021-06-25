@@ -12,8 +12,8 @@ function aggStats(data) { // array of Session objects
     totalAverageScore = totalScore/grandTotalModulesStudied;
     return {
         "totalModulesStudied": grandTotalModulesStudied,
-        "averageScore": totalAverageScore.toFixed(1),
-        "timeStudied": totalTimeStudied
+        "averageScore": parseFloat(parseFloat(totalAverageScore).toFixed(1)),
+        "timeStudied": parseInt(totalTimeStudied)
     }
 }
 module.exports = aggStats; 
