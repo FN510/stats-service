@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "0fafdbb7-d588-4500-89cf-5a50c5c26d5a",
+		"name": "stats-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/courses/:courseId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-User-Id is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "4000",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/courses/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"1"
+					]
+				},
+				"description": "Persists a session study event"
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-User-Id is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "60d4d9de2e65522824421939",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/courses/60d4e5d88adb144944f6e84e/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d4e5d88adb144944f6e84e",
+						""
+					]
+				},
+				"description": "Fetches course lifetime statistics"
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId/sessions/:sessionId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"X-User-Id is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "60d4d9de2e65522824421939",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/courses/60d4d9de2e65522824421938/sessions/60d5055e54cdd2417c025d44",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d4d9de2e65522824421938",
+						"sessions",
+						"60d5055e54cdd2417c025d44"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId/sessions/:sessionId - missing userId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response is JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/courses/60d4d9de2e65522824421938/sessions/60d5055e54cdd2417c025d44",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d4d9de2e65522824421938",
+						"sessions",
+						"60d5055e54cdd2417c025d44"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Content-Type is present\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\");",
+					"});",
+					"pm.test(\"Response is JSON\", function () {",
+					"    pm.response.to.be.json;",
+					"});",
+					"",
+					"pm.test(\"Response time is less than 200ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(200);",
+					"});"
+				]
+			}
+		}
+	]
+}
