@@ -278,7 +278,7 @@
 			"response": []
 		},
 		{
-			"name": "/courses/:courseId GET alice's scores",
+			"name": "/courses/:courseId GET alice's scores (maths)",
 			"event": [
 				{
 					"listen": "test",
@@ -329,7 +329,7 @@
 			"response": []
 		},
 		{
-			"name": "/courses/:courseId GET bob's scores",
+			"name": "/courses/:courseId GET bob's scores (english)",
 			"event": [
 				{
 					"listen": "test",
@@ -377,6 +377,58 @@
 					]
 				},
 				"description": "Fetches english lifetime statistics for Bob"
+			},
+			"response": []
+		},
+		{
+			"name": "/courses/:courseId GET bob's scores (maths)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"X-User-Id is present in request\", function () {\r",
+							"    pm.request.to.have.header(\"X-User-Id\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Bob's average\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.averageScore).to.eql(87.1);\r",
+							"});\r",
+							"pm.test(\"Bob's total time\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.timeStudied).to.eql(10800000);\r",
+							"});\r",
+							"pm.test(\"Bob's total no. of modules studied\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.totalModulesStudied).to.eql(23);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"type": "text",
+						"value": "60d5fabf3cb70946c077f222"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/courses/60d600393192904f2098442f/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"courses",
+						"60d600393192904f2098442f",
+						""
+					]
+				},
+				"description": "Fetches maths lifetime statistics for Bob"
 			},
 			"response": []
 		}
