@@ -80,6 +80,12 @@ const sessionSchema = new mongoose.Schema({
 ## Testing
 There is a [postman](http://postman.com) collection in the test folder. Each request in the postman collection has a series of tests that are run when a request is sent. A global variable url should be set http://localhost:3000 in postman.
 
+The aggregate function `aggStats()` is tested using the [chai assertion library](https://www.chaijs.com/api/assert/) with the [mocha](https://mochajs.org/#getting-started) test framework. Run
+```
+npm test
+```
+to test the aggregate function using the test cases in `test/test.js`.
+
 ### Some Data
 
 The seed.js file was used to put some data into the database.
